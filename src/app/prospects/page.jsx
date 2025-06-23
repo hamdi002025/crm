@@ -2,7 +2,6 @@
 import React from "react";
 
 function MainComponent() {
-  const [sidebarOpen, setSidebarOpen] = React.useState(false);
   const [prospects, setProspects] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [showCreateModal, setShowCreateModal] = React.useState(false);
@@ -17,9 +16,7 @@ function MainComponent() {
   const [stats, setStats] = React.useState({
     totalProspects: 0,
     newProspects: 0,
-    contactedProspects: 0,
     qualifiedProspects: 0,
-    convertedProspects: 0,
     conversionRate: 0,
   });
   const [currentUser] = React.useState({
@@ -110,7 +107,8 @@ function MainComponent() {
   const loadProspectsData = async () => {
     try {
       setLoading(true);
-
+      
+      // Simulation des données - à remplacer par de vrais appels API
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       const mockProspects = [
@@ -119,157 +117,90 @@ function MainComponent() {
           firstName: "Marie",
           lastName: "Dubois",
           email: "marie.dubois@email.com",
-          phone: "0123456789",
+          phone: "01 23 45 67 89",
           company: "Tech Solutions",
-          title: "Directrice Marketing",
           status: "new",
-          leadSource: "Site Web",
+          source: "website",
           score: 85,
-          assignedTo: "Jean Dupont",
+          lastContact: "2025-01-15",
+          createdAt: "2025-01-10",
           notes: "Intéressée par une complémentaire santé famille",
-          customFields: {},
-          createdAt: "2024-01-15T10:30:00Z",
-          updatedAt: "2024-01-15T10:30:00Z",
-          birthDate: "1985-03-15",
           postalCode: "75001",
+          birthDate: "1985-03-15",
           situationFamiliale: "Mariée",
           nombreEnfants: 2,
           revenusAnnuels: 45000,
-          mutuelleActuelle: "Harmonie Mutuelle",
-          dateFinContrat: "2024-06-30",
-          besoinsSpe: "Couverture dentaire renforcée",
-          sourcePublicite: "Google Ads",
-          utmSource: "google",
-          utmCampaign: "sante-famille",
-          utmMedium: "cpc",
-          lastCallAttempt: null,
-          callAttemptsCount: 0,
-          bestCallTime: "14h-17h",
         },
         {
           id: 2,
           firstName: "Pierre",
           lastName: "Martin",
           email: "pierre.martin@email.com",
-          phone: "0987654321",
-          company: "Consulting Pro",
-          title: "Consultant Senior",
-          status: "contacted",
-          leadSource: "Référence",
-          score: 72,
-          assignedTo: "Sophie Laurent",
-          notes: "Premier contact établi, RDV prévu",
-          customFields: {},
-          createdAt: "2024-01-12T14:20:00Z",
-          updatedAt: "2024-01-16T09:15:00Z",
-          birthDate: "1978-11-22",
+          phone: "01 34 56 78 90",
+          company: "Freelance",
+          status: "qualified",
+          source: "referral",
+          score: 92,
+          lastContact: "2025-01-14",
+          createdAt: "2025-01-08",
+          notes: "Recherche une mutuelle pour travailleur indépendant",
           postalCode: "69001",
+          birthDate: "1978-11-22",
           situationFamiliale: "Célibataire",
           nombreEnfants: 0,
           revenusAnnuels: 38000,
-          mutuelleActuelle: "MGEN",
-          dateFinContrat: "2024-12-31",
-          besoinsSpe: "Optique et dentaire",
-          sourcePublicite: "Bouche à oreille",
-          utmSource: "referral",
-          utmCampaign: "word-of-mouth",
-          utmMedium: "referral",
-          lastCallAttempt: "2024-01-16T09:00:00Z",
-          callAttemptsCount: 1,
-          bestCallTime: "9h-12h",
         },
         {
           id: 3,
           firstName: "Sophie",
           lastName: "Laurent",
           email: "sophie.laurent@email.com",
-          phone: "0147258369",
-          company: "Design Studio",
-          title: "Graphiste",
-          status: "qualified",
-          leadSource: "LinkedIn",
-          score: 91,
-          assignedTo: "Marc Durand",
-          notes: "Très intéressée, devis en cours",
-          customFields: {},
-          createdAt: "2024-01-08T16:45:00Z",
-          updatedAt: "2024-01-17T11:30:00Z",
-          birthDate: "1990-07-08",
+          phone: "01 45 67 89 01",
+          company: "Global Corp",
+          status: "contacted",
+          source: "social_media",
+          score: 78,
+          lastContact: "2025-01-12",
+          createdAt: "2025-01-05",
+          notes: "Demande de devis pour complémentaire optique",
           postalCode: "13001",
+          birthDate: "1990-07-08",
           situationFamiliale: "Pacsée",
           nombreEnfants: 1,
-          revenusAnnuels: 32000,
-          mutuelleActuelle: "Malakoff Humanis",
-          dateFinContrat: "2024-03-31",
-          besoinsSpe: "Maternité et pédiatrie",
-          sourcePublicite: "LinkedIn Ads",
-          utmSource: "linkedin",
-          utmCampaign: "freelance-sante",
-          utmMedium: "social",
-          lastCallAttempt: "2024-01-17T10:00:00Z",
-          callAttemptsCount: 2,
-          bestCallTime: "14h-18h",
+          revenusAnnuels: 52000,
         },
         {
           id: 4,
           firstName: "Jean",
           lastName: "Moreau",
           email: "jean.moreau@email.com",
-          phone: "0156789123",
-          company: "Auto Entrepreneur",
-          title: "Développeur Web",
-          status: "converted",
-          leadSource: "Facebook",
+          phone: "01 56 78 90 12",
+          company: "Startup Inc",
+          status: "proposal",
+          source: "google_ads",
           score: 95,
-          assignedTo: "Jean Dupont",
-          notes: "Contrat signé - excellent prospect",
-          customFields: {},
-          createdAt: "2024-01-05T08:15:00Z",
-          updatedAt: "2024-01-18T15:45:00Z",
-          birthDate: "1987-12-03",
+          lastContact: "2025-01-16",
+          createdAt: "2025-01-03",
+          notes: "Prêt à signer, attente validation conjoint",
           postalCode: "33000",
+          birthDate: "1982-12-03",
           situationFamiliale: "Marié",
           nombreEnfants: 3,
-          revenusAnnuels: 42000,
-          mutuelleActuelle: "Aucune",
-          dateFinContrat: null,
-          besoinsSpe: "Couverture complète famille nombreuse",
-          sourcePublicite: "Facebook Ads",
-          utmSource: "facebook",
-          utmCampaign: "independants-sante",
-          utmMedium: "social",
-          lastCallAttempt: "2024-01-18T14:00:00Z",
-          callAttemptsCount: 3,
-          bestCallTime: "19h-21h",
+          revenusAnnuels: 65000,
         },
       ];
 
       setProspects(mockProspects);
 
-      const newProspects = mockProspects.filter(
-        (p) => p.status === "new"
-      ).length;
-      const contactedProspects = mockProspects.filter(
-        (p) => p.status === "contacted"
-      ).length;
-      const qualifiedProspects = mockProspects.filter(
-        (p) => p.status === "qualified"
-      ).length;
-      const convertedProspects = mockProspects.filter(
-        (p) => p.status === "converted"
-      ).length;
-      const conversionRate =
-        mockProspects.length > 0
-          ? (convertedProspects / mockProspects.length) * 100
-          : 0;
+      const newProspects = mockProspects.filter(p => p.status === "new").length;
+      const qualifiedProspects = mockProspects.filter(p => p.status === "qualified").length;
+      const conversionRate = mockProspects.length > 0 ? (qualifiedProspects / mockProspects.length) * 100 : 0;
 
       setStats({
         totalProspects: mockProspects.length,
         newProspects,
-        contactedProspects,
         qualifiedProspects,
-        convertedProspects,
-        conversionRate: Math.round(conversionRate * 10) / 10,
+        conversionRate: conversionRate.toFixed(1),
       });
     } catch (error) {
       console.error("Erreur lors du chargement:", error);
@@ -285,11 +216,11 @@ function MainComponent() {
       case "contacted":
         return "bg-yellow-100 text-yellow-800 border-yellow-200";
       case "qualified":
-        return "bg-purple-100 text-purple-800 border-purple-200";
-      case "converted":
         return "bg-green-100 text-green-800 border-green-200";
-      case "unqualified":
-        return "bg-red-100 text-red-800 border-red-200";
+      case "proposal":
+        return "bg-purple-100 text-purple-800 border-purple-200";
+      case "closed":
+        return "bg-gray-100 text-gray-800 border-gray-200";
       default:
         return "bg-gray-100 text-gray-800 border-gray-200";
     }
@@ -303,82 +234,67 @@ function MainComponent() {
         return "Contacté";
       case "qualified":
         return "Qualifié";
-      case "converted":
-        return "Converti";
-      case "unqualified":
-        return "Non qualifié";
+      case "proposal":
+        return "Proposition";
+      case "closed":
+        return "Fermé";
       default:
         return status;
     }
   };
 
-  const getScoreColor = (score) => {
-    if (score >= 80) return "text-green-600";
-    if (score >= 60) return "text-yellow-600";
-    return "text-red-600";
+  const getSourceLabel = (source) => {
+    switch (source) {
+      case "website":
+        return "Site Web";
+      case "referral":
+        return "Recommandation";
+      case "social_media":
+        return "Réseaux Sociaux";
+      case "google_ads":
+        return "Google Ads";
+      case "email":
+        return "Email";
+      default:
+        return source;
+    }
   };
 
   const filteredProspects = prospects.filter((prospect) => {
-    if (filters.status !== "all" && prospect.status !== filters.status)
-      return false;
-    if (filters.source !== "all" && prospect.leadSource !== filters.source)
-      return false;
+    if (filters.status !== "all" && prospect.status !== filters.status) return false;
+    if (filters.source !== "all" && prospect.source !== filters.source) return false;
     if (
       filters.search &&
-      !`${prospect.firstName} ${prospect.lastName}`
-        .toLowerCase()
-        .includes(filters.search.toLowerCase()) &&
-      !prospect.email.toLowerCase().includes(filters.search.toLowerCase()) &&
-      !prospect.company.toLowerCase().includes(filters.search.toLowerCase())
+      !prospect.firstName.toLowerCase().includes(filters.search.toLowerCase()) &&
+      !prospect.lastName.toLowerCase().includes(filters.search.toLowerCase()) &&
+      !prospect.email.toLowerCase().includes(filters.search.toLowerCase())
     )
       return false;
     return true;
   });
 
-  const handleCreateProspect = async (prospectData) => {
-    try {
-      const newProspect = {
-        id: prospects.length + 1,
-        ...prospectData,
-        status: "new",
-        score: Math.floor(Math.random() * 40) + 60,
-        assignedTo: currentUser.name,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        callAttemptsCount: 0,
-      };
-
-      setProspects([...prospects, newProspect]);
-      setShowCreateModal(false);
-
-      // Simulation d'appel API
-      console.log("Nouveau prospect créé:", newProspect);
-    } catch (error) {
-      console.error("Erreur lors de la création:", error);
-    }
+  const handleCreateProspect = (prospectData) => {
+    const newProspect = {
+      id: prospects.length + 1,
+      ...prospectData,
+      status: "new",
+      score: Math.floor(Math.random() * 40) + 60,
+      lastContact: new Date().toISOString().split("T")[0],
+      createdAt: new Date().toISOString().split("T")[0],
+    };
+    setProspects([...prospects, newProspect]);
+    setShowCreateModal(false);
   };
 
-  const handleEditProspect = async (prospectData) => {
-    try {
-      const updatedProspects = prospects.map((prospect) =>
-        prospect.id === selectedProspect.id
-          ? {
-              ...prospect,
-              ...prospectData,
-              updatedAt: new Date().toISOString(),
-            }
-          : prospect
-      );
-
-      setProspects(updatedProspects);
-      setShowEditModal(false);
-      setSelectedProspect(null);
-
-      // Simulation d'appel API
-      console.log("Prospect modifié:", prospectData);
-    } catch (error) {
-      console.error("Erreur lors de la modification:", error);
-    }
+  const handleEditProspect = (prospectData) => {
+    const updatedProspects = prospects.map((prospect) =>
+      prospect.id === selectedProspect.id
+        ? { ...prospect, ...prospectData, lastContact: new Date().toISOString().split("T")[0] }
+        : prospect
+    );
+    setProspects(updatedProspects);
+    setShowEditModal(false);
+    setSelectedProspect(null);
   };
 
   const handleDeleteProspect = (prospectId) => {
@@ -394,19 +310,12 @@ function MainComponent() {
       email: "",
       phone: "",
       company: "",
-      title: "",
-      leadSource: "Site Web",
       notes: "",
-      birthDate: "",
       postalCode: "",
+      birthDate: "",
       situationFamiliale: "Célibataire",
       nombreEnfants: 0,
       revenusAnnuels: "",
-      mutuelleActuelle: "",
-      dateFinContrat: "",
-      besoinsSpe: "",
-      sourcePublicite: "",
-      bestCallTime: "9h-12h",
     });
 
     React.useEffect(() => {
@@ -417,37 +326,26 @@ function MainComponent() {
           email: prospect.email || "",
           phone: prospect.phone || "",
           company: prospect.company || "",
-          title: prospect.title || "",
-          leadSource: prospect.leadSource || "Site Web",
           notes: prospect.notes || "",
-          birthDate: prospect.birthDate || "",
           postalCode: prospect.postalCode || "",
+          birthDate: prospect.birthDate || "",
           situationFamiliale: prospect.situationFamiliale || "Célibataire",
           nombreEnfants: prospect.nombreEnfants || 0,
           revenusAnnuels: prospect.revenusAnnuels || "",
-          mutuelleActuelle: prospect.mutuelleActuelle || "",
-          dateFinContrat: prospect.dateFinContrat || "",
-          besoinsSpe: prospect.besoinsSpe || "",
-          sourcePublicite: prospect.sourcePublicite || "",
-          bestCallTime: prospect.bestCallTime || "9h-12h",
         });
       }
     }, [prospect]);
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      onSubmit({
-        ...formData,
-        nombreEnfants: parseInt(formData.nombreEnfants) || 0,
-        revenusAnnuels: parseFloat(formData.revenusAnnuels) || 0,
-      });
+      onSubmit(formData);
     };
 
     if (!isOpen) return null;
 
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-2xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="bg-white rounded-2xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
           <div className="p-6 border-b border-gray-200">
             <div className="flex items-center justify-between">
               <h3 className="text-xl font-semibold text-gray-800">{title}</h3>
@@ -468,6 +366,7 @@ function MainComponent() {
                 </label>
                 <input
                   type="text"
+                  name="firstName"
                   value={formData.firstName}
                   onChange={(e) =>
                     setFormData({ ...formData, firstName: e.target.value })
@@ -483,6 +382,7 @@ function MainComponent() {
                 </label>
                 <input
                   type="text"
+                  name="lastName"
                   value={formData.lastName}
                   onChange={(e) =>
                     setFormData({ ...formData, lastName: e.target.value })
@@ -498,6 +398,7 @@ function MainComponent() {
                 </label>
                 <input
                   type="email"
+                  name="email"
                   value={formData.email}
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
@@ -513,6 +414,7 @@ function MainComponent() {
                 </label>
                 <input
                   type="tel"
+                  name="phone"
                   value={formData.phone}
                   onChange={(e) =>
                     setFormData({ ...formData, phone: e.target.value })
@@ -527,58 +429,10 @@ function MainComponent() {
                 </label>
                 <input
                   type="text"
+                  name="company"
                   value={formData.company}
                   onChange={(e) =>
                     setFormData({ ...formData, company: e.target.value })
-                  }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Poste
-                </label>
-                <input
-                  type="text"
-                  value={formData.title}
-                  onChange={(e) =>
-                    setFormData({ ...formData, title: e.target.value })
-                  }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Source du Lead
-                </label>
-                <select
-                  value={formData.leadSource}
-                  onChange={(e) =>
-                    setFormData({ ...formData, leadSource: e.target.value })
-                  }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                >
-                  <option value="Site Web">Site Web</option>
-                  <option value="Google Ads">Google Ads</option>
-                  <option value="Facebook">Facebook</option>
-                  <option value="LinkedIn">LinkedIn</option>
-                  <option value="Référence">Référence</option>
-                  <option value="Salon">Salon</option>
-                  <option value="Autre">Autre</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Date de Naissance
-                </label>
-                <input
-                  type="date"
-                  value={formData.birthDate}
-                  onChange={(e) =>
-                    setFormData({ ...formData, birthDate: e.target.value })
                   }
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
@@ -590,6 +444,7 @@ function MainComponent() {
                 </label>
                 <input
                   type="text"
+                  name="postalCode"
                   value={formData.postalCode}
                   onChange={(e) =>
                     setFormData({ ...formData, postalCode: e.target.value })
@@ -600,15 +455,28 @@ function MainComponent() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Date de Naissance
+                </label>
+                <input
+                  type="date"
+                  name="birthDate"
+                  value={formData.birthDate}
+                  onChange={(e) =>
+                    setFormData({ ...formData, birthDate: e.target.value })
+                  }
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Situation Familiale
                 </label>
                 <select
+                  name="situationFamiliale"
                   value={formData.situationFamiliale}
                   onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      situationFamiliale: e.target.value,
-                    })
+                    setFormData({ ...formData, situationFamiliale: e.target.value })
                   }
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 >
@@ -626,10 +494,11 @@ function MainComponent() {
                 </label>
                 <input
                   type="number"
+                  name="nombreEnfants"
                   min="0"
                   value={formData.nombreEnfants}
                   onChange={(e) =>
-                    setFormData({ ...formData, nombreEnfants: e.target.value })
+                    setFormData({ ...formData, nombreEnfants: parseInt(e.target.value) || 0 })
                   }
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
@@ -641,6 +510,7 @@ function MainComponent() {
                 </label>
                 <input
                   type="number"
+                  name="revenusAnnuels"
                   value={formData.revenusAnnuels}
                   onChange={(e) =>
                     setFormData({ ...formData, revenusAnnuels: e.target.value })
@@ -648,88 +518,6 @@ function MainComponent() {
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Mutuelle Actuelle
-                </label>
-                <input
-                  type="text"
-                  value={formData.mutuelleActuelle}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      mutuelleActuelle: e.target.value,
-                    })
-                  }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Date Fin Contrat Actuel
-                </label>
-                <input
-                  type="date"
-                  value={formData.dateFinContrat}
-                  onChange={(e) =>
-                    setFormData({ ...formData, dateFinContrat: e.target.value })
-                  }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Meilleur Créneau d'Appel
-                </label>
-                <select
-                  value={formData.bestCallTime}
-                  onChange={(e) =>
-                    setFormData({ ...formData, bestCallTime: e.target.value })
-                  }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                >
-                  <option value="9h-12h">9h-12h</option>
-                  <option value="12h-14h">12h-14h</option>
-                  <option value="14h-17h">14h-17h</option>
-                  <option value="17h-19h">17h-19h</option>
-                  <option value="19h-21h">19h-21h</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Source Publicitaire
-                </label>
-                <input
-                  type="text"
-                  value={formData.sourcePublicite}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      sourcePublicite: e.target.value,
-                    })
-                  }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Besoins Spécifiques
-              </label>
-              <textarea
-                value={formData.besoinsSpe}
-                onChange={(e) =>
-                  setFormData({ ...formData, besoinsSpe: e.target.value })
-                }
-                rows="3"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Besoins spécifiques en matière d'assurance santé..."
-              />
             </div>
 
             <div>
@@ -737,6 +525,7 @@ function MainComponent() {
                 Notes
               </label>
               <textarea
+                name="notes"
                 value={formData.notes}
                 onChange={(e) =>
                   setFormData({ ...formData, notes: e.target.value })
@@ -769,37 +558,21 @@ function MainComponent() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
-
-      <div
-        className={`fixed inset-y-0 left-0 z-50 w-72 bg-white shadow-xl transform ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0`}
-      >
-        <div className="flex items-center justify-between h-20 px-6 border-b border-gray-200 bg-gradient-to-r from-blue-600 to-purple-600">
-          <div className="flex items-center">
-            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center mr-3">
-              <i className="fas fa-heartbeat text-blue-600 text-xl"></i>
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-white">AssurCRM</h1>
-              <p className="text-blue-100 text-xs">Gestion Assurance Santé</p>
-            </div>
+    <div className="min-h-screen bg-gray-50 flex">
+      {/* Sidebar */}
+      <div className="w-80 bg-white shadow-lg flex flex-col">
+        {/* Logo & Brand */}
+        <div className="h-20 px-6 border-b border-gray-200 bg-gradient-to-r from-blue-600 to-purple-600 flex items-center">
+          <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center mr-3">
+            <i className="fas fa-heartbeat text-blue-600 text-xl"></i>
           </div>
-          <button
-            onClick={() => setSidebarOpen(false)}
-            className="lg:hidden text-white hover:text-blue-200"
-          >
-            <i className="fas fa-times text-xl"></i>
-          </button>
+          <div>
+            <h1 className="text-xl font-bold text-white">AssurCRM</h1>
+            <p className="text-blue-100 text-xs">Gestion Assurance Santé</p>
+          </div>
         </div>
 
+        {/* User Profile */}
         <div className="p-6 border-b border-gray-200 bg-gray-50">
           <div className="flex items-center">
             <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
@@ -817,6 +590,7 @@ function MainComponent() {
           </div>
         </div>
 
+        {/* Navigation */}
         <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
           {navigationItems.map((item) => (
             <a
@@ -856,6 +630,7 @@ function MainComponent() {
           ))}
         </nav>
 
+        {/* Quick Actions */}
         <div className="p-4 border-t border-gray-200">
           <div className="bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl p-4 text-white">
             <h4 className="font-semibold mb-2">Action Rapide</h4>
@@ -873,27 +648,21 @@ function MainComponent() {
         </div>
       </div>
 
-      <div className="flex-1 lg:ml-0">
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col">
+        {/* Top Header */}
         <header className="bg-white shadow-sm border-b border-gray-200 h-20 flex items-center justify-between px-6">
-          <div className="flex items-center">
-            <button
-              onClick={() => setSidebarOpen(true)}
-              className="lg:hidden text-gray-500 hover:text-gray-700 mr-4"
-            >
-              <i className="fas fa-bars text-xl"></i>
-            </button>
-            <div>
-              <h2 className="text-2xl font-bold text-gray-800">
-                Gestion des Prospects
-              </h2>
-              <p className="text-gray-600">
-                Suivi et qualification des prospects assurance santé
-              </p>
-            </div>
+          <div>
+            <h2 className="text-2xl font-bold text-gray-800">
+              Gestion des Prospects
+            </h2>
+            <p className="text-gray-600">
+              Suivez et gérez vos prospects d'assurance santé
+            </p>
           </div>
 
           <div className="flex items-center space-x-4">
-            <div className="relative hidden md:block">
+            <div className="relative">
               <input
                 type="text"
                 placeholder="Rechercher un prospect..."
@@ -910,7 +679,7 @@ function MainComponent() {
               <button className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg">
                 <i className="fas fa-bell text-xl"></i>
                 <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                  {stats.newProspects}
+                  3
                 </span>
               </button>
             </div>
@@ -931,7 +700,8 @@ function MainComponent() {
           </div>
         </header>
 
-        <main className="flex-1 p-6">
+        {/* Main Content Area */}
+        <main className="flex-1 p-6 overflow-y-auto">
           {loading ? (
             <div className="flex items-center justify-center h-64">
               <div className="text-center">
@@ -941,7 +711,8 @@ function MainComponent() {
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-8">
+              {/* Stats Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                   <div className="flex items-center justify-between">
                     <div>
@@ -952,26 +723,7 @@ function MainComponent() {
                         {stats.totalProspects}
                       </p>
                       <p className="text-sm text-blue-600 mt-1">
-                        <i className="fas fa-users mr-1"></i>Base complète
-                      </p>
-                    </div>
-                    <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                      <i className="fas fa-users text-blue-600 text-xl"></i>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm font-medium text-gray-600">
-                        Nouveaux
-                      </p>
-                      <p className="text-3xl font-bold text-gray-900">
-                        {stats.newProspects}
-                      </p>
-                      <p className="text-sm text-blue-600 mt-1">
-                        <i className="fas fa-user-plus mr-1"></i>À traiter
+                        <i className="fas fa-users mr-1"></i>Tous statuts
                       </p>
                     </div>
                     <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
@@ -984,17 +736,17 @@ function MainComponent() {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm font-medium text-gray-600">
-                        Contactés
+                        Nouveaux Prospects
                       </p>
                       <p className="text-3xl font-bold text-gray-900">
-                        {stats.contactedProspects}
+                        {stats.newProspects}
                       </p>
-                      <p className="text-sm text-yellow-600 mt-1">
-                        <i className="fas fa-phone mr-1"></i>En cours
+                      <p className="text-sm text-green-600 mt-1">
+                        <i className="fas fa-arrow-up mr-1"></i>Ce mois
                       </p>
                     </div>
-                    <div className="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center">
-                      <i className="fas fa-phone text-yellow-600 text-xl"></i>
+                    <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                      <i className="fas fa-user-check text-green-600 text-xl"></i>
                     </div>
                   </div>
                 </div>
@@ -1003,13 +755,13 @@ function MainComponent() {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm font-medium text-gray-600">
-                        Qualifiés
+                        Prospects Qualifiés
                       </p>
                       <p className="text-3xl font-bold text-gray-900">
                         {stats.qualifiedProspects}
                       </p>
                       <p className="text-sm text-purple-600 mt-1">
-                        <i className="fas fa-star mr-1"></i>Chauds
+                        <i className="fas fa-star mr-1"></i>Qualité
                       </p>
                     </div>
                     <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
@@ -1022,41 +774,23 @@ function MainComponent() {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm font-medium text-gray-600">
-                        Convertis
-                      </p>
-                      <p className="text-3xl font-bold text-gray-900">
-                        {stats.convertedProspects}
-                      </p>
-                      <p className="text-sm text-green-600 mt-1">
-                        <i className="fas fa-check-circle mr-1"></i>Clients
-                      </p>
-                    </div>
-                    <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                      <i className="fas fa-check-circle text-green-600 text-xl"></i>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm font-medium text-gray-600">
-                        Taux Conversion
+                        Taux de Conversion
                       </p>
                       <p className="text-3xl font-bold text-gray-900">
                         {stats.conversionRate}%
                       </p>
-                      <p className="text-sm text-emerald-600 mt-1">
+                      <p className="text-sm text-orange-600 mt-1">
                         <i className="fas fa-chart-line mr-1"></i>Performance
                       </p>
                     </div>
-                    <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center">
-                      <i className="fas fa-chart-line text-emerald-600 text-xl"></i>
+                    <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
+                      <i className="fas fa-percentage text-orange-600 text-xl"></i>
                     </div>
                   </div>
                 </div>
               </div>
 
+              {/* Prospects Table */}
               <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
                 <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
                   <h3 className="text-lg font-semibold text-gray-800 mb-4 md:mb-0">
@@ -1075,8 +809,8 @@ function MainComponent() {
                       <option value="new">Nouveaux</option>
                       <option value="contacted">Contactés</option>
                       <option value="qualified">Qualifiés</option>
-                      <option value="converted">Convertis</option>
-                      <option value="unqualified">Non qualifiés</option>
+                      <option value="proposal">Proposition</option>
+                      <option value="closed">Fermés</option>
                     </select>
 
                     <select
@@ -1087,11 +821,11 @@ function MainComponent() {
                       className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     >
                       <option value="all">Toutes les sources</option>
-                      <option value="Site Web">Site Web</option>
-                      <option value="Google Ads">Google Ads</option>
-                      <option value="Facebook">Facebook</option>
-                      <option value="LinkedIn">LinkedIn</option>
-                      <option value="Référence">Référence</option>
+                      <option value="website">Site Web</option>
+                      <option value="referral">Recommandation</option>
+                      <option value="social_media">Réseaux Sociaux</option>
+                      <option value="google_ads">Google Ads</option>
+                      <option value="email">Email</option>
                     </select>
 
                     <button
@@ -1118,13 +852,13 @@ function MainComponent() {
                           Statut
                         </th>
                         <th className="text-left py-3 px-4 font-semibold text-gray-700">
-                          Score
-                        </th>
-                        <th className="text-left py-3 px-4 font-semibold text-gray-700">
                           Source
                         </th>
                         <th className="text-left py-3 px-4 font-semibold text-gray-700">
-                          Assigné à
+                          Score
+                        </th>
+                        <th className="text-left py-3 px-4 font-semibold text-gray-700">
+                          Dernier Contact
                         </th>
                         <th className="text-left py-3 px-4 font-semibold text-gray-700">
                           Actions
@@ -1141,8 +875,7 @@ function MainComponent() {
                             <div className="flex items-center">
                               <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mr-3">
                                 <span className="text-white font-semibold text-sm">
-                                  {prospect.firstName[0]}
-                                  {prospect.lastName[0]}
+                                  {prospect.firstName[0]}{prospect.lastName[0]}
                                 </span>
                               </div>
                               <div>
@@ -1150,7 +883,7 @@ function MainComponent() {
                                   {prospect.firstName} {prospect.lastName}
                                 </div>
                                 <div className="text-sm text-gray-500">
-                                  {prospect.company} - {prospect.title}
+                                  {prospect.company}
                                 </div>
                               </div>
                             </div>
@@ -1173,43 +906,27 @@ function MainComponent() {
                             </span>
                           </td>
                           <td className="py-4 px-4">
-                            <div
-                              className={`font-semibold ${getScoreColor(
-                                prospect.score
-                              )}`}
-                            >
-                              {prospect.score}/100
-                            </div>
-                            <div className="w-16 bg-gray-200 rounded-full h-2 mt-1">
-                              <div
-                                className={`h-2 rounded-full ${
-                                  prospect.score >= 80
-                                    ? "bg-green-500"
-                                    : prospect.score >= 60
-                                    ? "bg-yellow-500"
-                                    : "bg-red-500"
-                                }`}
-                                style={{ width: `${prospect.score}%` }}
-                              ></div>
+                            <span className="text-sm text-gray-900">
+                              {getSourceLabel(prospect.source)}
+                            </span>
+                          </td>
+                          <td className="py-4 px-4">
+                            <div className="flex items-center">
+                              <div className="w-16 bg-gray-200 rounded-full h-2 mr-2">
+                                <div
+                                  className="bg-blue-600 h-2 rounded-full"
+                                  style={{ width: `${prospect.score}%` }}
+                                ></div>
+                              </div>
+                              <span className="text-sm font-medium text-gray-900">
+                                {prospect.score}
+                              </span>
                             </div>
                           </td>
                           <td className="py-4 px-4">
-                            <div className="text-sm text-gray-900">
-                              {prospect.leadSource}
-                            </div>
-                            <div className="text-xs text-gray-500">
-                              {prospect.sourcePublicite}
-                            </div>
-                          </td>
-                          <td className="py-4 px-4">
-                            <div className="text-sm text-gray-900">
-                              {prospect.assignedTo}
-                            </div>
-                            <div className="text-xs text-gray-500">
-                              {new Date(prospect.createdAt).toLocaleDateString(
-                                "fr-FR"
-                              )}
-                            </div>
+                            <span className="text-sm text-gray-900">
+                              {new Date(prospect.lastContact).toLocaleDateString("fr-FR")}
+                            </span>
                           </td>
                           <td className="py-4 px-4">
                             <div className="flex space-x-2">
@@ -1223,21 +940,18 @@ function MainComponent() {
                               >
                                 <i className="fas fa-edit"></i>
                               </button>
-                              <a
-                                href={`/comparateur?prospect=${prospect.id}`}
-                                className="p-2 text-purple-600 hover:bg-purple-100 rounded-lg"
-                                title="Simulation Oggo"
-                              >
-                                <i className="fas fa-heartbeat"></i>
-                              </a>
                               <button
-                                onClick={() =>
-                                  handleDeleteProspect(prospect.id)
-                                }
+                                onClick={() => handleDeleteProspect(prospect.id)}
                                 className="p-2 text-red-600 hover:bg-red-100 rounded-lg"
                                 title="Supprimer"
                               >
                                 <i className="fas fa-trash"></i>
+                              </button>
+                              <button
+                                className="p-2 text-green-600 hover:bg-green-100 rounded-lg"
+                                title="Appeler"
+                              >
+                                <i className="fas fa-phone"></i>
                               </button>
                             </div>
                           </td>
@@ -1264,6 +978,7 @@ function MainComponent() {
         </main>
       </div>
 
+      {/* Modals */}
       <ProspectModal
         isOpen={showCreateModal}
         onClose={() => setShowCreateModal(false)}
